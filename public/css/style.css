@@ -1,0 +1,100 @@
+.top {
+    margin: 2vh 15vw;
+    padding: 0 5vw;
+}
+
+.flex-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-menu-item {
+    flex-grow: 0;
+}
+
+.flex-align-self-end {
+    align-self: flex-end;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-3 {
+    flex: 3;
+}
+
+.gap {
+    gap: 12vw;
+}
+
+.todo-container {
+    margin: 2vh 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-stretch {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.todo-actions {
+    display: flex;
+    align-items: center;
+}
+
+.todo-row {
+    display: flex;
+}
+
+@media screen and (min-width: 0px) and (max-width: 700px){
+    .top {
+        margin: 2vh 0;
+        padding: 0 3vw;
+    }
+
+    .flex-menu.gap {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .flex-menu.gap .flex-menu.flex-2{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .gap {
+        gap: 0;
+    }
+
+    .flex-menu.gap .flex-menu-item {
+        margin: 1vh 0 0 0;
+    }
+
+    .flex-3 {
+        flex: 1;
+    }
+
+    .todo-stretch {
+        flex-direction: column;
+    }
+
+    .todo-actions > * {
+        flex: 1;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1150px){
+    .top {
+        margin: 2vh 0;
+        padding: 0 5vw;
+    }
+}
+
+

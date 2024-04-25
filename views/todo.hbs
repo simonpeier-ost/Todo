@@ -1,0 +1,50 @@
+<h1 class="my-5">Add New Todo</h1>
+<form
+    {{#if_eq edit true}}
+    action="/todo/{{todo._id}}"
+    {{else}}
+    action="/add-todo"
+    {{/if_eq}} method="POST">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Todo" required
+               {{#if_eq edit true}}value="{{todo.title}}"{{/if_eq}}>
+        <label for="title">Title</label>
+    </div>
+    <div class="form-floating mb-3">
+    <select name="importance" class="form-select" id="floatingSelect" aria-label="importance selector">
+        {{#switch todo.importance}}
+            <option {{#if_eq edit false}} selected{{/if_eq}} disabled>-</option>
+            <option {{#case 1}} selected {{/case}} value=1>One</option>
+            <option {{#case 2}} selected {{/case}} value=2>Two</option>
+            <option {{#case 3}} selected {{/case}} value=3>Three</option>
+            <option {{#case 4}} selected {{/case}} value=4>Four</option>
+            <option {{#case 5}} selected {{/case}} value=5>Five</option>
+        </select>
+        {{/switch}}
+        <label for="floatingSelect">Select importance</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="date" class="form-control" id="dueDate" name="dueDate" placeholder="dd.mm.yyyy" required {{#if_eq
+                edit true}}value="{{formatDateForInput todo.dueDate}}" {{/if_eq}}>
+        <label for="dueDate">Due Date</label>
+    </div>
+    <div class="form-floating ">
+        <textarea id="description" class="form-control" rows="5" name="description" placeholder="Clean house"
+                  required>{{#if_eq edit true}}{{todo.description}}{{/if_eq}}</textarea>
+        <label for="description">Description</label><br>
+    </div>
+    <div class="form-check mb-5">
+        <input class="form-check-input" type="checkbox" name="finished" id="flexCheckDefault"
+               {{#if todo.finished}}checked{{/if}}>
+        <label class="form-check-label" for="flexCheckDefault">Completed</label>
+    </div>
+    <button class="btn btn-primary" name="action" value="update" type="submit">{{#if_eq edit true}}
+        Update{{else}}Add{{/if_eq}} Todo
+    </button>
+    <button class="btn btn-primary" name="action" value="updateAndOverview" type="submit">{{#if_eq edit true}}
+        Update{{else}}Add{{/if_eq}} Todo & Overview
+    </button>
+</form>
+<form action="/" method="GET">
+    <button class="btn btn-primary">Overview</button>
+</form>

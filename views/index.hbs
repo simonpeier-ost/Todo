@@ -1,0 +1,81 @@
+<div class="flex-menu my-2">
+    <form action="/add-todo" method="GET">
+        <button class="flex-menu-item btn btn-primary">Create new Todo</button>
+    </form>
+    <form method="GET">
+        <input type="hidden" name="theme"
+            {{#if_eq sessionUserSettings.theme "dark"}}
+               value="light"
+            {{else}}
+               value="dark"
+            {{/if_eq}}>
+        <button class="flex-menu-item btn btn-primary">Toggle style</button>
+    </form>
+</div>
+
+<div class="flex-menu gap my-2">
+    <div class="flex-menu flex-2">
+        <button class="flex-menu-item btn btn-primary">Name</button>
+        <form method="GET">
+            <input type="hidden" name="orderBy" value="dueDate">
+            <input type="hidden" name="orderDirection"
+                   value="{{#if_eq sessionUserSettings.orderDirection 1}}-1{{else}}1{{/if_eq}}">
+            <script>console.log({{sessionUserSettings.orderDirection}})</script>
+            {{#if_eq sessionUserSettings.orderBy "dueDate"}}
+                <button class="flex-menu-item btn btn-primary">
+                    {{#if_eq sessionUserSettings.orderDirection 1}} By Due Date &#8595
+                    {{else}}By Due Date &#8593{{/if_eq}}
+                </button>
+            {{else}}
+                <button class="flex-menu-item btn btn-primary">Due Date</button>
+            {{/if_eq}}
+        </form>
+        <button class="flex-menu-item btn btn-primary">Creation Date</button>
+        <button class="flex-menu-item btn btn-primary">Importance</button>
+    </div>
+    {{#if_eq sessionUserSettings.filter "all"}}
+        <form method="get" class="filter">
+            <input type="hidden" name="filter" value="uncompleted">
+            <button class="flex-menu-item flex-align-self-end btn btn-primary">Filter Completed</button>
+        </form>
+    {{else}}
+        <form method="get" class="filter">
+            <input type="hidden" name="filter" value="all">
+            <button class="flex-menu-item flex-align-self-end btn btn-primary">Show All</button>
+        </form>
+    {{/if_eq}}
+</div>
+
+<section class="mt-5">
+    {{#each todos}}
+        <div class="todo-container mb-4">
+            <div class="todo-stretch">
+                <div class="flex-1">
+                    <div class="todo-row py-1">
+                        <div class="flex-1">{{formatDateForView dueDate}}</div>
+                        <div class="flex-3"><strong>{{title}}</strong></div>
+                    </div>
+                    <div class="todo-row py-1">
+                        <div class="flex-1">
+                            <input type="checkbox" id="finishedCheckbox_{{_id}}" {{#if finished}}checked{{/if}} disabled="disabled">
+                            <label for="finishedCheckbox_{{_id}}" >
+                                {{#if finished}}
+                                    Completed
+                                {{else}}
+                                    Open
+                                {{/if}}
+                            </label>
+                        </div>
+                        <div class="flex-3">{{description}}</div>
+                    </div>
+                </div>
+                <div class="todo-actions">
+                    <div class="me-4">{{{generateStarIcons importance}}}</div>
+                    <form action="/todo/{{this._id}}" method="GET">
+                        <button class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</section>
