@@ -11,7 +11,8 @@ export class IndexController {
         const {orderBy, orderDirection, filter} = (req as any).session.userSettings;
         try {
             // Fetch todos from the database
-            let todos = await todoStore.all(); // Assuming you have an `all` method in your TodoStore to fetch all todos
+            const order = Number(orderDirection) === -1 ? -1 : 1;
+            let todos = await todoStore.all(orderBy as keyof Todo, order); // Assuming you have an `all` method in your TodoStore to fetch all todos
             if (filter === "uncompleted") {
                 todos = (todos as Todo[]).filter((todo: Todo) => !todo.finished);
             }
