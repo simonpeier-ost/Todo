@@ -3,7 +3,6 @@ import {Todo, todoStore} from "../services/todo-service";
 
 export class IndexController {
     constructor() {
-        // Initialize default todos when the controller is instantiated
         todoStore.initializeDefaults().catch(error => console.error("Error initializing default todos:", error));
     }
 
@@ -12,7 +11,7 @@ export class IndexController {
         try {
             // Fetch todos from the database
             const order = Number(orderDirection) === -1 ? -1 : 1;
-            let todos = await todoStore.all(orderBy as keyof Todo, order); // Assuming you have an `all` method in your TodoStore to fetch all todos
+            let todos = await todoStore.all(orderBy as keyof Todo, order);
             if (filter === "uncompleted") {
                 todos = (todos as Todo[]).filter((todo: Todo) => !todo.finished);
             }
@@ -21,17 +20,15 @@ export class IndexController {
             res.render("index", {
                 todos: todos,
                 sessionUserSettings: (req as any).session.userSettings
-            }); // Pass the fetched todos to the template
+            });
         } catch (error) {
             console.error("Error fetching todos:", error);
-            // Handle error appropriately
             res.status(500).send("Internal Server Error");
         }
     }
 
     async renderAddTodo(req: Request, res: Response) {
-        // Render the index template with the fetched data
-        res.render("todo", {sessionUserSettings: (req as any).session.userSettings, edit: false}); // Pass the fetched todos to the template
+        res.render("todo", {sessionUserSettings: (req as any).session.userSettings, edit: false});
     }
 
     async addTodo(req: Request, res: Response) {
@@ -53,7 +50,6 @@ export class IndexController {
     async renderEditTodo(req: Request, res: Response) {
         const id = String(req.params.id);
         const todo = await todoStore.get(id);
-        // Render the index template with the fetched data
         res.render("todo", {todo: todo, sessionUserSettings: (req as any).session.userSettings, edit: true}); // Pass the fetched todos to the template
     }
 

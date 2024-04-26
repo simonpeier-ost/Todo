@@ -24,10 +24,9 @@ export const sessionUserSettings = (req: any, res: Response, next: (err?: any) =
         userSettings.orderBy = orderBy;
     }
     if (orderDirection) {
-        console.log(orderDirection)
         userSettings.orderDirection = orderDirection;
     }
-    if (filter){
+    if (filter) {
         userSettings.filter = filter;
     }
 

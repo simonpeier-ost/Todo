@@ -10,14 +10,12 @@ import exphbs from 'express-handlebars';
 
 import {sessionUserSettings, Settings} from './utils/session-middleware';
 
-//new for TS
 declare module 'express-session' {
   interface SessionData {
     settings: Settings;
   }
 }
 
-//new for TS
 declare global {
   namespace Express {
     interface Request {
