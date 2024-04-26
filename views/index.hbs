@@ -15,63 +15,63 @@
 
 <div class="flex-menu gap my-2">
     <div class="flex-menu flex-2">
-        <form method="GET">
+        <form class="flex-menu-item" method="GET">
             <input type="hidden" name="orderBy" value="title">
             <input type="hidden" name="orderDirection"
                    value="{{#if_eq sessionUserSettings.orderDirection "1"}}-1{{else}}1{{/if_eq}}">
             {{#if_eq sessionUserSettings.orderBy "title"}}
-                <button class="flex-menu-item btn btn-primary">Title
+                <button class="btn btn-primary stretch-button">Title
                     {{#if_eq sessionUserSettings.orderDirection "1"}}&#8595
                     {{else}}&#8593{{/if_eq}}
                 </button>
             {{else}}
-                <button class="flex-menu-item btn btn-primary">Title</button>
+                <button class="btn btn-primary stretch-button">Title</button>
             {{/if_eq}}
         </form>
-        <form method="GET">
+        <form class="flex-menu-item" method="GET">
             <input type="hidden" name="orderBy" value="dueDate">
             <input type="hidden" name="orderDirection"
                    value="{{#if_eq sessionUserSettings.orderDirection "1"}}-1{{else}}1{{/if_eq}}">
             {{#if_eq sessionUserSettings.orderBy "dueDate"}}
-                <button class="flex-menu-item btn btn-primary">Due Date
+                <button class="btn btn-primary stretch-button">Due Date
                     {{#if_eq sessionUserSettings.orderDirection "1"}}&#8595
                     {{else}}&#8593{{/if_eq}}
                 </button>
             {{else}}
-                <button class="flex-menu-item btn btn-primary">Due Date</button>
+                <button class="btn btn-primary stretch-button">Due Date</button>
             {{/if_eq}}
         </form>
-        <form method="GET">
+        <form class="flex-menu-item" method="GET">
             <input type="hidden" name="orderBy" value="creationDate">
             <input type="hidden" name="orderDirection"
                    value="{{#if_eq sessionUserSettings.orderDirection "1"}}-1{{else}}1{{/if_eq}}">
             {{#if_eq sessionUserSettings.orderBy "creationDate"}}
-                <button class="flex-menu-item btn btn-primary">Creation Date
+                <button class="btn btn-primary stretch-button">Creation Date
                     {{#if_eq sessionUserSettings.orderDirection "1"}}&#8595
                     {{else}}&#8593{{/if_eq}}
                 </button>
             {{else}}
-                <button class="flex-menu-item btn btn-primary">Creation Date</button>
+                <button class="btn btn-primary stretch-button">Creation Date</button>
             {{/if_eq}}
         </form>
-        <form method="GET">
+        <form class="flex-menu-item" method="GET">
             <input type="hidden" name="orderBy" value="importance">
             <input type="hidden" name="orderDirection"
                    value="{{#if_eq sessionUserSettings.orderDirection "1"}}-1{{else}}1{{/if_eq}}">
             {{#if_eq sessionUserSettings.orderBy "importance"}}
-                <button class="flex-menu-item btn btn-primary">Importance
+                <button class="btn btn-primary stretch-button">Importance
                     {{#if_eq sessionUserSettings.orderDirection "1"}}&#8595
                     {{else}}&#8593{{/if_eq}}
                 </button>
             {{else}}
-                <button class="flex-menu-item btn btn-primary">Importance</button>
+                <button class="btn btn-primary stretch-button">Importance</button>
             {{/if_eq}}
         </form>
     </div>
     {{#if_eq sessionUserSettings.filter "all"}}
         <form method="get" class="filter">
             <input type="hidden" name="filter" value="uncompleted">
-            <button class="flex-menu-item flex-align-self-end btn btn-primary">Filter Completed</button>
+            <button class="flex-menu-item flex-align-self-end btn btn-primary stretch-button">Filter Completed</button>
         </form>
     {{else}}
         <form method="get" class="filter">
@@ -106,9 +106,9 @@
                     </div>
                 </div>
                 <div class="todo-actions">
-                    <div class="me-4">{{{generateStarIcons importance}}}</div>
+                    <div class="">{{{generateStarIcons importance}}}</div>
                     <form action="/todo/{{this._id}}" method="GET">
-                        <button class="btn btn-primary">Edit</button>
+                        <button class="ms-4 btn btn-primary stretch-button">Edit</button>
                     </form>
                 </div>
             </div>
