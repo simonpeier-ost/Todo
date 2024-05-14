@@ -19,23 +19,25 @@ export class Todo {
 }
 
 export class TodoStore {
-    constructor(public db?: Datastore) {
+    private db: Datastore;
+
+    constructor(db?: Datastore) {
         const options = process.env.DB_TYPE === "FILE" ? {filename: './data/todos.db', autoload: true} : {}
         this.db = db || new Datastore(options);
     }
 
     async add(title: string, importance: number, dueDate: Date, description: string, finished: boolean,): Promise<Todo> {
         const todo = new Todo(undefined, title, Number(importance), new Date(), new Date(dueDate), description, finished);
-        return this.db!.insert(todo);
+        return this.db.insert(todo);
     }
 
     async update(id: string, title: string, importance: number, dueDate: Date, description: string, finished: boolean): Promise<number> {
         importance = Number(importance);
-        return this.db!.update({_id: id}, {$set: {title, importance, dueDate, description, finished}})
+        return this.db.update({_id: id}, {$set: {title, importance, dueDate, description, finished}})
     }
 
     async get(id: string): Promise<Document> {
-        return this.db!.findOne({_id: id});
+        return this.db.findOne({_id: id});
     }
 
     convertDocumentToTodo(document: Todo): Todo {
@@ -51,7 +53,7 @@ export class TodoStore {
     }
 
     async all(orderBy: keyof Todo, order: 1 | -1): Promise<Todo[]> {
-        const documents = await this.db!
+        const documents = await this.db
             .find({})
             .sort({[orderBy]: order})
             .exec();
@@ -61,7 +63,7 @@ export class TodoStore {
     }
 
     async initializeDefaults(): Promise<void> {
-        await this.db!.remove({}, {multi: true});
+        await this.db.remove({}, {multi: true});
 
         const defaultTodos: Todo[] = [
             new Todo(undefined, "Clean the house", 4, new Date(), new Date("2024-04-20"), "House is dirty as fxxk", true),
