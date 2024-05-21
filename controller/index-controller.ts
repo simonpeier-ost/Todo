@@ -64,7 +64,7 @@ export class IndexController {
                 res.redirect("/");
             }
         } catch (error) {
-            console.error('Error adding todo:', error);
+            console.error('Error updating todo:', error);
             res.status(500).send('Internal Server Error');
         }
     }
