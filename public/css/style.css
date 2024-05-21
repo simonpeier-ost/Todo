@@ -32,6 +32,11 @@
     gap: 12vw;
 }
 
+.wrap-text {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
 .todo-container {
     margin: 2vh 0;
     display: flex;
